@@ -1,0 +1,3 @@
+/Users/mikhailarzumanov/Пыль/University/2024:2025:2/Programming 2/PacMan_Game/cmake-build-debug/CMakeFiles/PacMan_Game.dir
+/Users/mikhailarzumanov/Пыль/University/2024:2025:2/Programming 2/PacMan_Game/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/mikhailarzumanov/Пыль/University/2024:2025:2/Programming 2/PacMan_Game/cmake-build-debug/CMakeFiles/rebuild_cache.dir
