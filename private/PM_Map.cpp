@@ -19,7 +19,7 @@ void PM_Map::DisplayMap(const PM_PacMan& pacman ) {
                 x++;
             }
             else if (map[y][x] == 1)
-                std::cout << "\033[44m \033[0m";  // Стена
+                std::cout <<"\033[44m \033[0m";  // Стена
             else if (map[y][x]==0)
                  std::cout << '.';
             else if (map[y][x] == -1)
@@ -37,9 +37,9 @@ void PM_Map::GameLoop() {
             char ch = getchar();
             pacman.SetDirection(ch);
         }
-
-        DisplayMap(pacman);
         pacman.Update();
+        usleep(10000);
+        DisplayMap(pacman);
         usleep(400000); //Задержка 100 мс (Pac-Man двигается каждые 0.1 сек)
     }
 }
@@ -76,15 +76,3 @@ void PM_Map::enableBufferedInput() {
     term.c_lflag |= ECHO;
     tcsetattr(0, TCSANOW, &term);
 }
-
-/*char PM_Map::getch() {
-    struct termios oldt, newt;
-    char ch;
-    tcgetattr(STDIN_FILENO, &oldt);
-    newt = oldt;
-    newt.c_lflag &= ~(ICANON | ECHO);
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
-    ch = getchar();
-    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
-    return ch;
-}*/
