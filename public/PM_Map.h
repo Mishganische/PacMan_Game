@@ -24,9 +24,15 @@ public:
     }
 
 
+    //start game stuff
+    int Menu();
+    void ClearMap();
+
+
     //cosmetics
     void disableBufferedInput();
     void enableBufferedInput();
+
 
     void SetMapCell( const int cX, const int cY, const int value) { map[cY][cX] = value; map[cY][cX+1] = -1;}
 
@@ -34,10 +40,10 @@ private:
 
     //cosmetics
     int kbhit();// Функция для проверки нажатия клавиши (аналог _kbhit())
-    void ClearScreen();
+    void ClearScreen() const;
 
 
-    bool IsRunning = true;
+    bool IsRunning = false;
 
 
     //map stuff

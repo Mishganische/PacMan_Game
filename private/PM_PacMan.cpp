@@ -55,23 +55,10 @@ void PM_PacMan::SetDirection(const char& NewDirection) {
         case 'd': direction = 1; break;
         case 's': direction = 2; break;
         case 'a': direction = 3; break;
-        case 'q': return;
+        case 'q': map.Menu();
+        default:
+            return;
         }
 
 
 }
-
-/*void PM_PacMan::Menu() {
-    std::cout<<'\t'<< "PACMAN"<<'\n';
-    std::cout<<"1. New Game";
-    std::cout<<'\t'<< "2. Exit";
-
-    std::cout<<'\n';
-    std::cout<<"Choose Option:";
-    int ChoiceOptionValue;
-    std::cin>>ChoiceOptionValue;
-    switch (ChoiceOptionValue) {
-        case 1:
-            map
-    }
-    */

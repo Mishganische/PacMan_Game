@@ -9,8 +9,7 @@ int main() {
 
     PM_Map gameMap;
     gameMap.disableBufferedInput();
-    gameMap.GameLoop();
-
+    gameMap.Menu();
     gameMap.enableBufferedInput();
 
     return 0;
