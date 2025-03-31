@@ -5,19 +5,19 @@
 #include "../public/PM_PacMan.h"
 #include "iostream"
 
-PM_PacMan::PM_PacMan(int startX, int startY, PM_Map& gameMap)
-    : PM_GameObjectCore(startX, startY), map(gameMap), direction(1) { }// По умолчанию вправо
+PM_PacMan::PM_PacMan( PM_Map& gameMap)
+    : map(gameMap), direction(1) { }// По умолчанию вправо
 
 
 
-int PM_PacMan::Update() {
+void PM_PacMan::Update() {
 
     //check if the wall in front of pacman
     if ((direction == 0 && map.IsWall(x, y - 1)) ||
         (direction == 1 && map.IsWall(x + 2, y)) ||
         (direction == 2 && map.IsWall(x, y + 1)) ||
         (direction == 3 && map.IsWall(x - 1, y))) {
-        return 0;
+        return;
         }
 
     switch (direction) {
@@ -25,14 +25,12 @@ int PM_PacMan::Update() {
         case 1: x+=2; break;
         case 2: y+=1; break;
         case 3: x-=2; break;
-        default: break;
+        default: return;
     }
 
     if (!map.IsEmpty(x,y)) {
         map.SetMapCell(x,y,-1);
     }
-    return 0;
-
 }
 
 void PM_PacMan::Render() const {

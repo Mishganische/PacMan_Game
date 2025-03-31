@@ -3,19 +3,26 @@
 //
 #include "../public/PM_Map.h"
 #include "../public/PM_PacMan.h"
+#include "../public/Ghost.h"
 #include "iostream"
 #include "stdio.h"
-#include <unistd.h>
-#include <termios.h>
+#include "cstdlib"
+#include "unistd.h"
+#include "termios.h"
+#include "time.h"
 
 
 
-void PM_Map::DisplayMap(const PM_PacMan& pacman ) {
+void PM_Map::DisplayMap(const PM_PacMan& pacman, const Ghost& ghost ) {
     ClearScreen();
     for (int y = 0; y < HEIGHT; y++) {
         for (int x = 0; x < WIDTH; x++) {
             if (x == pacman.GetX() && y == pacman.GetY()) {
                 std::cout << "\033[43m \033[0m"<<"\033[43m \033[0m";// Pacman
+                x++;
+            }
+            else if (x == ghost.getX() && y == ghost.getY()) {
+                std::cout << "GG";
                 x++;
             }
             else if (map[y][x] == 1)
@@ -30,7 +37,10 @@ void PM_Map::DisplayMap(const PM_PacMan& pacman ) {
 }
 
 void PM_Map::GameLoop() {
-    PM_PacMan pacman(2, 1, *this); // Создаём Pac-Man'а
+    srand(time(0));
+    PM_PacMan pacman( *this);// Создаём Pac-Man'а
+    Ghost G(18, 11, 0, 0);
+
 
     ClearMap();
 
@@ -40,7 +50,8 @@ void PM_Map::GameLoop() {
             pacman.SetDirection(ch);
         }
         pacman.Update();
-        DisplayMap(pacman);
+        G.Update(pacman.GetX(), pacman.GetY(), map);
+        DisplayMap(pacman, G);
         usleep(100000); //Задержка 100 мс (Pac-Man двигается каждые 0.1 сек)
     }
 }
@@ -48,7 +59,7 @@ void PM_Map::GameLoop() {
 
 //menu stuff
 int PM_Map::Menu() {
-    while (1) {
+    while (true) {
         ClearScreen();
         std::cout<<'\t'<< "PACMAN"<<'\n';
         std::cout<<"1. New Game\n";
@@ -65,7 +76,7 @@ int PM_Map::Menu() {
                 IsRunning = false;
                 enableBufferedInput();
                 printf("Exiting...\n");
-                system("exit");
+                exit(0);
             default:
                 std::cout<<"Invalid choice. Try again.\n";
                 usleep(1000000);

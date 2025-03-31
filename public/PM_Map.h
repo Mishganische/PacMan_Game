@@ -2,6 +2,7 @@
 
 #ifndef PM_MAP_H
 #define PM_MAP_H
+#include "Ghost.h"
 #include "iostream"
 #include "vector"
 
@@ -13,7 +14,7 @@ class PM_PacMan;
 class PM_Map {
 public:
 
-    void DisplayMap(const PM_PacMan& pacman);
+    void DisplayMap(const PM_PacMan& pacman, const Ghost& ghost);
     void GameLoop();
     bool IsWall( const int x, const int y) const {
         return map[y][x] == 1; // Проверяем, является ли клетка стеной
