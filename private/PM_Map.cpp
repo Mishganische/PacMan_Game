@@ -13,7 +13,7 @@
 
 
 
-void PM_Map::DisplayMap(const PM_PacMan& pacman, const Ghost& ghost ) {
+void PM_Map::DisplayMap(const PM_PacMan& pacman, const Ghost& ghost ) const {
     ClearScreen();
     for (int y = 0; y < HEIGHT; y++) {
         for (int x = 0; x < WIDTH; x++) {
@@ -29,7 +29,7 @@ void PM_Map::DisplayMap(const PM_PacMan& pacman, const Ghost& ghost ) {
                 std::cout <<"\033[44m \033[0m";  // Стена
             else if (map[y][x]==0)
                  std::cout << '.';
-            else if (map[y][x] == -1)
+            else if (map[y][x] == -1 || map[y][x] == -2)
                 std::cout<< " ";// Пустое место
         }
         std::cout << '\n';

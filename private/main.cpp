@@ -14,5 +14,4 @@ int main() {
     gameMap.enableBufferedInput();
 
     return 0;
-
 }

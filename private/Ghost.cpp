@@ -6,6 +6,9 @@
 #include "iostream"
 #include "vector"
 #include "random"
+#include "queue"
+#include "limits"
+
 
 // define global generator of numbers
 std::random_device rd;  // source of entropy
@@ -65,36 +68,65 @@ void Ghost::MoveStep(const std::vector<std::vector<int>> &map) {
 
 // chase the pacman (The closest way to Pac-Man)
 void Ghost::chasePlayer(int playerX, int playerY, const std::vector<std::vector<int>> &map) {
-    int bestX = x, bestY = y;
-    double bestDistance = std::hypot(playerX - x, playerY - y); // Euclidean distance
+    int rows = map.size();
+    int cols = map[0].size();
+    std::vector<std::vector<int>> dist(rows, std::vector<int>(cols, std::numeric_limits<int>::max()));
+    std::vector<std::vector<std::pair<int, int>>> prev(rows, std::vector<std::pair<int, int>>(cols, {-1, -1}));
 
-    // check directions
-    std::vector<std::pair<int, int>> moves = {{x, y - 1}, {x + 1, y}, {x, y + 1}, {x - 1, y}};
-    for (const auto& move : moves) {
-        int newX = move.first, newY = move.second;
-        if (CanMove(newX, newY, map)) {
-            double distance = std::hypot(playerX - newX, playerY - newY);
-            if (distance < bestDistance) {
-                bestDistance = distance;
-                bestX = newX;
-                bestY = newY;
+    std::priority_queue<Node, std::vector<Node>, std::greater<Node>> pq;
+    pq.push({x, y, 0});
+    dist[y][x] = 0;
+
+    std::vector<std::pair<int, int>> directions = {{0, -1}, {2, 0}, {0, 1}, {-2, 0}};
+
+    while (!pq.empty()) {
+        Node current = pq.top();
+        pq.pop();
+
+        if (current.x == playerX && current.y == playerY)
+            break;
+
+        for (auto &[dx, dy] : directions) {
+            int newX = current.x + dx;
+            int newY = current.y + dy;
+            if (CanMove(newX, newY, map) && dist[newY][newX] > current.dist + 1) {
+                dist[newY][newX] = current.dist + 1;
+                prev[newY][newX] = {current.x, current.y};
+                pq.push({newX, newY, dist[newY][newX]});
             }
         }
     }
 
-    x = bestX;
-    y = bestY;
+    // Восстановление пути и движение призрака
+    int nextX = playerX, nextY = playerY;
+    while (prev[nextY][nextX] != std::make_pair(x, y) && prev[nextY][nextX] != std::make_pair(-1, -1)) {
+        std::tie(nextX, nextY) = prev[nextY][nextX];
+    }
+
+    if (CanMove(nextX, nextY, map)) {
+        x = nextX;
+        y = nextY;
+    }
 }
 
 
 void Ghost::Update(int playerX, int playerY, const std::vector<std::vector<int>>& map) {
-    if (scatterMode) {
-        MoveStep(map);
-    } else {
-        chasePlayer(playerX, playerY, map);
+    FrameCounter++;
+    if (FrameCounter >= ghostSpeedFactor) {
+        SwitchMode(playerX, playerY);
+        if (scatterMode) {
+            MoveStep(map);
+        } else {
+            chasePlayer(playerX, playerY, map);
+        }
+        FrameCounter = 0;
     }
 }
 
-void Ghost::SwitchMode() {
-    scatterMode = !scatterMode;
+void Ghost::SwitchMode(int playerX, int playerY) {
+    if (std::hypot(playerX - x, playerY - y)>=20)
+    scatterMode = true;
+    else {
+        scatterMode = false;
+    }
 }

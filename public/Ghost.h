@@ -7,8 +7,13 @@
 
 #include "vector"
 
+struct Node {
+    int x, y, dist;
+    bool operator>(const Node &other) const { return dist > other.dist; }
+};
 
 class Ghost {
+
 
 public:
 
@@ -31,11 +36,13 @@ public:
     void Update(int playerX, int playerY, const std::vector<std::vector<int>>& map);
 
 
-    void SwitchMode();
+    void SwitchMode(int playerX, int playerY);
 
 
 
 private:
+    int ghostSpeedFactor = 2; // Призрак движется в 2 раза медленнее игрока
+    int FrameCounter = 0;
     int x, y;
     int direction;
     bool scatterMode=true;; // scatter or chase mode

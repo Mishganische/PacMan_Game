@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.30"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "PacMan_Game",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "PacMan_Game::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-PacMan_Game-Debug-c02e642f0c7acd8cc72c.json",
+					"name" : "PacMan_Game",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/mikhailarzumanov/\u041f\u044b\u043b\u044c/University/2024:2025:2/Programming 2/PacMan_Game/cmake-build-debug",
+		"source" : "/Users/mikhailarzumanov/\u041f\u044b\u043b\u044c/University/2024:2025:2/Programming 2/PacMan_Game"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
