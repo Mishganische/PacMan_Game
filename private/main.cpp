@@ -1,6 +1,5 @@
 #include <iostream>
 #include "../public/PM_Map.h"
-#include "../public/PM_PacMan.h"
 #include "ctime"
 
 int main() {

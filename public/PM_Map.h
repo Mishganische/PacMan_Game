@@ -33,12 +33,13 @@ public:
 
     //end game stuff
 
-    bool CheckGhostCollision(PM_PacMan& pacman, Ghost& Ghost);
+    static bool CheckGhostCollision(const PM_PacMan& pacman, const Ghost& Ghost);
 
 
     //cosmetics
-    void disableBufferedInput();
-    void enableBufferedInput();
+    static void disableBufferedInput();
+
+    static void enableBufferedInput();
 
 
     void SetMapCell( const int cX, const int cY, const int value) { map[cY][cX] = value; map[cY][cX+1] = -1;}
@@ -46,8 +47,8 @@ public:
 private:
 
     //cosmetics
-    int kbhit();// Функция для проверки нажатия клавиши (аналог _kbhit())
-    void ClearScreen() const;
+    static int kbhit();// Функция для проверки нажатия клавиши (аналог _kbhit())
+    static void ClearScreen();
 
 
     bool IsRunning = false;

@@ -3,7 +3,6 @@
 //
 
 #include "../public/PM_PacMan.h"
-#include "../public/Ghost.h"
 #include "iostream"
 
 PM_PacMan::PM_PacMan( PM_Map& gameMap)

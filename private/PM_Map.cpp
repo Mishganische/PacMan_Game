@@ -37,7 +37,7 @@ void PM_Map::DisplayMap(const PM_PacMan& pacman, const RedGhost& ghost ) const {
 }
 
 void PM_Map::GameLoop() {
-    srand(time(0));
+    srand(time(nullptr));
     PM_PacMan pacman( *this);// Создаём Pac-Man'а
     pacman.IsAlive = true;
 
@@ -93,7 +93,7 @@ int PM_Map::Menu() {
 
 
 //cosmetics stuff realization
-void PM_Map::ClearScreen() const{
+void PM_Map::ClearScreen() {
     printf("\033[2J");
     printf("\033[0;0f");
 }
@@ -131,7 +131,7 @@ void PM_Map::ClearMap() {
 }
 
 
-bool PM_Map::CheckGhostCollision(PM_PacMan& pacman, Ghost& Ghost) {
+bool PM_Map::CheckGhostCollision(const PM_PacMan& pacman, const Ghost& Ghost) {
     if (pacman.GetX()==Ghost.GetX() && pacman.GetY()==Ghost.GetY()) {
         return true;
     }
