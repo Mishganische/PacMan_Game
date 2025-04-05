@@ -3,14 +3,15 @@
 //
 
 #include "../public/PM_PacMan.h"
+#include "../public/Ghost.h"
 #include "iostream"
 
 PM_PacMan::PM_PacMan( PM_Map& gameMap)
     : map(gameMap), direction(1) { }// По умолчанию вправо
 
 
-
 void PM_PacMan::Update() {
+    if (!IsAlive) return;
 
     //check if the wall in front of pacman
     if ((direction == 0 && map.IsWall(x, y - 1)) ||

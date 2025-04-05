@@ -3,7 +3,7 @@
 //
 #include "../public/PM_Map.h"
 #include "../public/PM_PacMan.h"
-#include "../public/Ghost.h"
+#include "../public/RedGhost.h"
 #include "iostream"
 #include "stdio.h"
 #include "cstdlib"
@@ -13,7 +13,7 @@
 
 
 
-void PM_Map::DisplayMap(const PM_PacMan& pacman, const Ghost& ghost ) const {
+void PM_Map::DisplayMap(const PM_PacMan& pacman, const RedGhost& ghost ) const {
     ClearScreen();
     for (int y = 0; y < HEIGHT; y++) {
         for (int x = 0; x < WIDTH; x++) {
@@ -39,16 +39,24 @@ void PM_Map::DisplayMap(const PM_PacMan& pacman, const Ghost& ghost ) const {
 void PM_Map::GameLoop() {
     srand(time(0));
     PM_PacMan pacman( *this);// Создаём Pac-Man'а
-    Ghost G(18, 11, 0, 0);
+    pacman.IsAlive = true;
+
+    RedGhost G(18, 11, 0, 0);
 
 
     ClearMap();
 
-    while (IsRunning) {
+    while (pacman.IsAlive) {
         if (kbhit()) {
             char ch = getchar();
             pacman.SetDirection(ch);
         }
+        if (CheckGhostCollision(pacman, G)) {
+            ClearScreen();
+            Menu();
+            break;
+        }
+
         pacman.Update();
         G.Update(pacman.GetX(), pacman.GetY(), map);
         DisplayMap(pacman, G);
@@ -70,7 +78,6 @@ int PM_Map::Menu() {
         char ChoiceOptionValue = getchar();
         switch (ChoiceOptionValue) {
             case '1':
-                IsRunning = true;
                 GameLoop();
             case '2':
                 IsRunning = false;
@@ -121,4 +128,13 @@ void PM_Map::ClearMap() {
             if (map[y][x] == -1) map[y][x] = 0;
         }
     }
+}
+
+
+bool PM_Map::CheckGhostCollision(PM_PacMan& pacman, Ghost& Ghost) {
+    if (pacman.GetX()==Ghost.GetX() && pacman.GetY()==Ghost.GetY()) {
+        return true;
+    }
+    return false;
+
 }

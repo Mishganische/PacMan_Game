@@ -9,6 +9,10 @@
 
 class RedGhost: public Ghost {
 
+
+public:
+    void chasePlayer(int playerX, int playerY, const std::vector<std::vector<int>> &map) override;
+    using Ghost::Ghost; // constructor
 };
 
 

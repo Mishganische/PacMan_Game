@@ -2,7 +2,7 @@
 
 #ifndef PM_MAP_H
 #define PM_MAP_H
-#include "Ghost.h"
+#include "RedGhost.h"
 #include "iostream"
 #include "vector"
 
@@ -10,11 +10,12 @@
 #define WIDTH 42
 
 class PM_PacMan;
+class RedGhost;
 
 class PM_Map {
 public:
 
-    void DisplayMap(const PM_PacMan& pacman, const Ghost& ghost) const;
+    void DisplayMap(const PM_PacMan& pacman, const RedGhost& ghost) const;
     void GameLoop();
     bool IsWall( const int x, const int y) const {
         return map[y][x] == 1; // Проверяем, является ли клетка стеной
@@ -28,6 +29,11 @@ public:
     //start game stuff
     int Menu();
     void ClearMap();
+
+
+    //end game stuff
+
+    bool CheckGhostCollision(PM_PacMan& pacman, Ghost& Ghost);
 
 
     //cosmetics

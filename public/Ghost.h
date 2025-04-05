@@ -30,7 +30,7 @@ public:
     void MoveStep(const std::vector<std::vector<int>>& map);
 
 
-    void chasePlayer(int playerX, int playerY, const std::vector<std::vector<int>>& map);
+    virtual void chasePlayer(int playerX, int playerY, const std::vector<std::vector<int>>& map) =0;
 
 
     void Update(int playerX, int playerY, const std::vector<std::vector<int>>& map);
@@ -38,9 +38,12 @@ public:
 
     void SwitchMode(int playerX, int playerY);
 
+    int GetX() const{return x;}
+    int GetY() const{return y;}
 
 
-private:
+
+protected:
     int ghostSpeedFactor = 2; // Призрак движется в 2 раза медленнее игрока
     int FrameCounter = 0;
     int x, y;

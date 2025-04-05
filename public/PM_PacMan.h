@@ -14,6 +14,7 @@ class PM_PacMan{
 public:
     PM_PacMan(PM_Map& gameMap);
 
+
     void Update();
     void Render() const;
 
@@ -25,8 +26,11 @@ public:
     void SetX(int NewX){x = NewX;}
     void SetY(int NewY){y = NewY;}
 
+    bool IsAlive = false;
+
 private:
     PM_Map& map;
+
     int direction = 1;
     int x=2;
     int y=1;
