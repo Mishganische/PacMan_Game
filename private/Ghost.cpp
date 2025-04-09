@@ -3,6 +3,7 @@
 //
 
 #include "../public/Ghost.h"
+#include "../public/PM_PacMan.h"
 #include "iostream"
 #include "vector"
 #include "random"
@@ -46,11 +47,13 @@ void Ghost::MoveStep(const std::vector<std::vector<int>> &map) {
             break; // left
         default:return;
     }*/
+
+    int opposite = (direction + 2) % 4; //opposite direction for current direction
     int newDirection = distrib(gen);
 
     // Change direction if it turns into the wall
     while (!CanMove(x + (newDirection == 1) - (newDirection == 3),
-                    y + (newDirection == 2) - (newDirection == 0), map)) {
+                    y + (newDirection == 2) - (newDirection == 0), map) || newDirection == opposite) {
         newDirection = distrib(gen);
                     }
 
@@ -66,24 +69,23 @@ void Ghost::MoveStep(const std::vector<std::vector<int>> &map) {
 }
 
 
-void Ghost::Update(int playerX, int playerY, const std::vector<std::vector<int>>& map) {
+void Ghost::Update(const PM_PacMan& pacman, const std::vector<std::vector<int>>& map) {
     FrameCounter++;
     if (FrameCounter >= ghostSpeedFactor) {
-        SwitchMode(playerX, playerY);
-        if (scatterMode) {
-            MoveStep(map);
+        SwitchMode(pacman.GetX(), pacman.GetY());
+        if (IsPlayerVisible) {
+            ScatterMode(map);
         } else {
-            chasePlayer(playerX, playerY, map);
+            ChasePlayer(pacman, map);
         }
         FrameCounter = 0;
     }
 }
 
 void Ghost::SwitchMode(int playerX, int playerY) {
-    if (std::hypot(playerX - x, playerY - y)>=20)
-    scatterMode = true;
+    if (std::hypot(playerX - x, playerY - y)>=15)
+    IsPlayerVisible = true;
     else {
-        scatterMode = false;
+        IsPlayerVisible = false;
     }
 }
-

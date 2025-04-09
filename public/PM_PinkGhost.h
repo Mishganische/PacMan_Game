@@ -1,15 +1,16 @@
 //
-// Created by MIKHAIL ARZUMANOV on 2025. 03. 27..
+// Created by MIKHAIL ARZUMANOV on 2025. 04. 07..
 //
 
-#ifndef REDGHOST_H
-#define REDGHOST_H
+#ifndef PM_PINKGHOST_H
+#define PM_PINKGHOST_H
+
 
 #include "Ghost.h"
 
 class PM_PacMan; // Forward declaration
 
-class RedGhost: public Ghost {
+class PM_PinkGhost: public Ghost {
 
 
 public:
@@ -18,13 +19,11 @@ public:
     using Ghost::Ghost; // constructor
 
 
-
 private:
-    int CornerX = 38;
-    int CornerY = 2;
+    int CornerX = 2;
+    int CornerY = 1;
 };
 
 
 
-
-#endif //REDGHOST_H
+#endif //PM_PINKGHOST_H

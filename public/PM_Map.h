@@ -2,7 +2,7 @@
 
 #ifndef PM_MAP_H
 #define PM_MAP_H
-#include "RedGhost.h"
+#include "PM_PinkGhost.h"
 #include "iostream"
 #include "vector"
 
@@ -10,15 +10,16 @@
 #define WIDTH 42
 
 class PM_PacMan;
+class Ghost; // Forward declaration
 class RedGhost;
 
 class PM_Map {
 public:
 
-    void DisplayMap(const PM_PacMan& pacman, const RedGhost& ghost) const;
+    void DisplayMap(const PM_PacMan& pacman, const PM_PinkGhost& PinkGhost, const RedGhost& RedGhost) const;
     void GameLoop();
     bool IsWall( const int x, const int y) const {
-        return map[y][x] == 1; // Проверяем, является ли клетка стеной
+        return map[y][x] == 1;
     }
 
     bool IsEmpty( const int x, const int y ) const {
@@ -33,7 +34,7 @@ public:
 
     //end game stuff
 
-    static bool CheckGhostCollision(const PM_PacMan& pacman, const Ghost& Ghost);
+    static bool CheckGhostCollision(const PM_PacMan& pacman, const PM_PinkGhost& PinkGhost, const RedGhost& RedGhost);
 
 
     //cosmetics
@@ -47,7 +48,7 @@ public:
 private:
 
     //cosmetics
-    static int kbhit();// Функция для проверки нажатия клавиши (аналог _kbhit())
+    static int kbhit();// the function which check the input (analog _kbhit())
     static void ClearScreen();
 
 
@@ -70,7 +71,7 @@ private:
         {1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,1,1,0,0,0,0,0,0,1,1,0,0,1,1,0,0,1,1,1,1,1,1,1,1,1,1},
         {-2,-2,-2,-2,-2,-2,-2,-2,1,1,0,0,1,1,0,0,1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,1,1,-2,-2,-2,-2,-2,-2,-2,-2},
         {-2,-2,-2,-2,-2,-2,-2,-2,1,1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,-2,-2,-2,-2,-2,-2,-2,-2},
-        {1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1},
+        {1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,1,1,1,1,1,1,1,1,1,1},
         {1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1},
         {1,1,0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,0,1,1,0,0,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,0,1,1},
         {1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1},

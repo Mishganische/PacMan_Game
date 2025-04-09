@@ -7,6 +7,10 @@
 
 #include "vector"
 
+
+class PM_PacMan; // Forward declaration
+
+
 struct Node {
     int x, y, dist;
     bool operator>(const Node &other) const { return dist > other.dist; }
@@ -30,10 +34,12 @@ public:
     void MoveStep(const std::vector<std::vector<int>>& map);
 
 
-    virtual void chasePlayer(int playerX, int playerY, const std::vector<std::vector<int>>& map) =0;
+    virtual void ChasePlayer(const PM_PacMan& pacman, const std::vector<std::vector<int>>& map) =0;
+
+    virtual void ScatterMode(const std::vector<std::vector<int>>& map) =0;
 
 
-    void Update(int playerX, int playerY, const std::vector<std::vector<int>>& map);
+    void Update(const PM_PacMan& pacman, const std::vector<std::vector<int>>& map);
 
 
     void SwitchMode(int playerX, int playerY);
@@ -44,11 +50,11 @@ public:
 
 
 protected:
-    int ghostSpeedFactor = 2; // Призрак движется в 2 раза медленнее игрока
+    int ghostSpeedFactor = 2; // ghost moves 2 times slower than the player
     int FrameCounter = 0;
     int x, y;
     int direction;
-    bool scatterMode=true;; // scatter or chase mode
+    bool IsPlayerVisible=true;; // scatter or chase mode
     int scatterTargetX, scatterTargetY; // default aim coordinates
     bool IsEaten=false;
 

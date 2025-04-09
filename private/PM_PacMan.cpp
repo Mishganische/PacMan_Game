@@ -6,7 +6,7 @@
 #include "iostream"
 
 PM_PacMan::PM_PacMan( PM_Map& gameMap)
-    : map(gameMap), direction(1) { }// По умолчанию вправо
+    : map(gameMap), direction(1) { }// by default the direction is right
 
 
 void PM_PacMan::Update() {
@@ -46,7 +46,7 @@ void PM_PacMan::SetDirection(const char& NewDirection) {
         (NewDirection == 's' && map.IsWall(x, y + 1)) ||
         (NewDirection == 'a' && map.IsWall(x - 1, y))) {
         return;
-    }
+        }
 
     switch (NewDirection) {
         case 'w': direction = 0; break;
@@ -56,7 +56,7 @@ void PM_PacMan::SetDirection(const char& NewDirection) {
         case 'q': map.Menu();
         default:
             return;
-        }
+    }
 
 
 }

@@ -4,6 +4,7 @@
 #include "../public/PM_Map.h"
 #include "../public/PM_PacMan.h"
 #include "../public/RedGhost.h"
+#include "../public/PM_PinkGhost.h"
 #include "iostream"
 #include "stdio.h"
 #include "cstdlib"
@@ -13,7 +14,7 @@
 
 
 
-void PM_Map::DisplayMap(const PM_PacMan& pacman, const RedGhost& ghost ) const {
+void PM_Map::DisplayMap(const PM_PacMan& pacman, const PM_PinkGhost& PinkGhost, const RedGhost& RedGhost ) const {
     ClearScreen();
     for (int y = 0; y < HEIGHT; y++) {
         for (int x = 0; x < WIDTH; x++) {
@@ -21,16 +22,20 @@ void PM_Map::DisplayMap(const PM_PacMan& pacman, const RedGhost& ghost ) const {
                 std::cout << "\033[43m \033[0m"<<"\033[43m \033[0m";// Pacman
                 x++;
             }
-            else if (x == ghost.getX() && y == ghost.getY()) {
-                std::cout << "GG";
+            else if (x == RedGhost.getX() && y == RedGhost.getY()) {
+                std::cout << "\033[41m \033[0m"<<"\033[41m \033[0m";
+                x++;
+            }
+            else if (x == PinkGhost.GetX() && y == PinkGhost.GetY()) {
+                std::cout << "\033[105m \033[0m"<<"\033[105m \033[0m";
                 x++;
             }
             else if (map[y][x] == 1)
-                std::cout <<"\033[44m \033[0m";  // Стена
+                std::cout <<"\033[44m \033[0m";
             else if (map[y][x]==0)
                  std::cout << '.';
             else if (map[y][x] == -1 || map[y][x] == -2)
-                std::cout<< " ";// Пустое место
+                std::cout<< " ";
         }
         std::cout << '\n';
     }
@@ -38,10 +43,11 @@ void PM_Map::DisplayMap(const PM_PacMan& pacman, const RedGhost& ghost ) const {
 
 void PM_Map::GameLoop() {
     srand(time(nullptr));
-    PM_PacMan pacman( *this);// Создаём Pac-Man'а
+    PM_PacMan pacman( *this);// create pacman object
     pacman.IsAlive = true;
 
-    RedGhost G(18, 11, 0, 0);
+    PM_PinkGhost PinkGhost(18, 11, 0, 0);
+    RedGhost RedGhost(22, 11, 0, 0);
 
 
     ClearMap();
@@ -51,16 +57,17 @@ void PM_Map::GameLoop() {
             char ch = getchar();
             pacman.SetDirection(ch);
         }
-        if (CheckGhostCollision(pacman, G)) {
+        if (CheckGhostCollision(pacman, PinkGhost, RedGhost)) {
             ClearScreen();
             Menu();
             break;
         }
 
         pacman.Update();
-        G.Update(pacman.GetX(), pacman.GetY(), map);
-        DisplayMap(pacman, G);
-        usleep(100000); //Задержка 100 мс (Pac-Man двигается каждые 0.1 сек)
+        PinkGhost.Update(pacman, map);
+        RedGhost.Update(pacman, map);
+        DisplayMap(pacman, PinkGhost, RedGhost);
+        usleep(100000); //delay 100 мс (Pac-Man moves each 0.1 сек)
     }
 }
 
@@ -131,8 +138,10 @@ void PM_Map::ClearMap() {
 }
 
 
-bool PM_Map::CheckGhostCollision(const PM_PacMan& pacman, const Ghost& Ghost) {
-    if (pacman.GetX()==Ghost.GetX() && pacman.GetY()==Ghost.GetY()) {
+bool PM_Map::CheckGhostCollision(const PM_PacMan& pacman, const PM_PinkGhost& PinkGhost, const RedGhost& RedGhost) {
+    if ((pacman.GetX()==PinkGhost.GetX() && pacman.GetY()==PinkGhost.GetY())//
+    || pacman.GetX()==RedGhost.GetX() && pacman.GetY()==RedGhost.GetY()
+        ) {
         return true;
     }
     return false;

@@ -22,6 +22,7 @@ public:
 
     int GetX() const{return x;}
     int GetY() const{return y;}
+    int GetDirection() const{return direction;}
 
     void SetX(int NewX){x = NewX;}
     void SetY(int NewY){y = NewY;}
