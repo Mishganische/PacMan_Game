@@ -7,6 +7,7 @@
 
 
 #include "Ghost.h"
+#include "PM_PacMan.h"
 
 class PM_PacMan; // Forward declaration
 
@@ -14,14 +15,24 @@ class PM_PinkGhost: public Ghost {
 
 
 public:
-    void ChasePlayer(const PM_PacMan& pacman, const std::vector<std::vector<int>>& map) override;
+
+    void ChaseMode(const PM_PacMan& pacman, const std::vector<std::vector<int>>& map);
     void ScatterMode(const std::vector<std::vector<int>>& map) override;
+    void MoveStep(const PM_PacMan& pacman, const std::vector<std::vector<int>> &map) override;
     using Ghost::Ghost; // constructor
 
 
+    void SwitchMode(int playerX, int playerY) override;
+
+
 private:
-    int CornerX = 2;
-    int CornerY = 1;
+    int scatterTargetX = 2;
+    int scatterTargetY = 1;
+    int scatterZoneMinX = 0;
+    int scatterZoneMaxX = 10;
+    int scatterZoneMinY = 0;
+    int scatterZoneMaxY = 6;
+
 };
 
 

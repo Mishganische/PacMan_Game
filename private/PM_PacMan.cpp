@@ -12,6 +12,13 @@ PM_PacMan::PM_PacMan( PM_Map& gameMap)
 void PM_PacMan::Update() {
     if (!IsAlive) return;
 
+    if (IsPowerPellet) {
+        PowerPelletTimer--;
+        if (PowerPelletTimer <= 0) {
+            IsPowerPellet = false;
+        }
+    }
+
     //check if the wall in front of pacman
     if ((direction == 0 && map.IsWall(x, y - 1)) ||
         (direction == 1 && map.IsWall(x + 2, y)) ||
@@ -28,9 +35,18 @@ void PM_PacMan::Update() {
         default: return;
     }
 
+    if (map.IsPowerPellet(x,y)) {
+        map.SetMapCell(x,y,-3);
+        //map.SetMapCell(x+1,y,-3);
+        IsPowerPellet = true;
+        PowerPelletTimer = 100;
+
+    }
+
     if (!map.IsEmpty(x,y)) {
         map.SetMapCell(x,y,-1);
     }
+
 }
 
 void PM_PacMan::Render() const {

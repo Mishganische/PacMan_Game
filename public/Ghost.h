@@ -11,6 +11,12 @@
 class PM_PacMan; // Forward declaration
 
 
+enum GhostMode {
+    SCATTER,
+    CHASE,
+    FRIGHTENED
+};
+
 struct Node {
     int x, y, dist;
     bool operator>(const Node &other) const { return dist > other.dist; }
@@ -31,21 +37,23 @@ public:
         return map[newY][newX] != 1;
     }
 
-    void MoveStep(const std::vector<std::vector<int>>& map);
+    virtual void MoveStep(const PM_PacMan& pacman, const std::vector<std::vector<int>>& map) = 0;
+    void SetMode(GhostMode mode);
 
-
-    virtual void ChasePlayer(const PM_PacMan& pacman, const std::vector<std::vector<int>>& map) =0;
+    GhostMode GetMode() const {return currentMode;};
 
     virtual void ScatterMode(const std::vector<std::vector<int>>& map) =0;
 
+    void FrightenedMode(const std::vector<std::vector<int>>& map);
+
+    void ResetStart();
 
     void Update(const PM_PacMan& pacman, const std::vector<std::vector<int>>& map);
-
-
-    void SwitchMode(int playerX, int playerY);
+    virtual void SwitchMode(int playerX, int playerY)=0;
 
     int GetX() const{return x;}
     int GetY() const{return y;}
+
 
 
 
@@ -54,10 +62,15 @@ protected:
     int FrameCounter = 0;
     int x, y;
     int direction;
-    bool IsPlayerVisible=true;; // scatter or chase mode
+    int FrightenedTimer =0;
+    int startX, startY;
+    int IsFrightened =false;
+    bool IsPlayerVisible=true; // scatter or chase mode
     int scatterTargetX, scatterTargetY; // default aim coordinates
-    bool IsEaten=false;
+    GhostMode currentMode = SCATTER;
+    bool reachedScatterTarget = false;
 
+    double Distance(int x1, int y1, int x2, int y2);
 
 };
 

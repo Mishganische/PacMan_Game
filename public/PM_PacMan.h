@@ -28,9 +28,12 @@ public:
     void SetY(int NewY){y = NewY;}
 
     bool IsAlive = false;
+    bool IsPowerPellet = false;
 
 private:
     PM_Map& map;
+
+    int PowerPelletTimer=0;
 
     int direction = 1;
     int x=2;

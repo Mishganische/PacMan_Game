@@ -1,16 +1,10 @@
+
+// Created by MIKHAIL ARZUMANOV on 2025. 05. 11..
 //
-// Created by MIKHAIL ARZUMANOV on 2025. 03. 27..
-//
 
-#include "../public/RedGhost.h"
-#include "../public/PM_PacMan.h"
-#include "queue"
-#include "limits"
-#include "random"
+#include "../public/PM_BlueGhost.h"
 
-
-// chase the pacman (The closest way to Pac-Man)
-void RedGhost::ChaseMode(int TargetX, int TargetY, const std::vector<std::vector<int>> &map) {
+void PM_BlueGhost::ChaseMode(int TargetX, int TargetY, const std::vector<std::vector<int>> &map) {
     int rows = map.size();
     int cols = map[0].size();
     std::vector<std::vector<int>> dist(rows, std::vector<int>(cols, std::numeric_limits<int>::max()));
@@ -52,12 +46,13 @@ void RedGhost::ChaseMode(int TargetX, int TargetY, const std::vector<std::vector
     }
 }
 
-void RedGhost::ScatterMode(const std::vector<std::vector<int>> &map) {
+void PM_BlueGhost::ScatterMode(const std::vector<std::vector<int>> &map) {
     if (currentMode == SCATTER) {
         if (!reachedScatterTarget) {
             // Двигаемся к scatter-цели
             if (x == scatterTargetX && y == scatterTargetY) {
                 reachedScatterTarget = true;
+                currentMode = CHASE;
             } else {
                 int rows = map.size();
                 int cols = map[0].size();
@@ -101,59 +96,17 @@ void RedGhost::ScatterMode(const std::vector<std::vector<int>> &map) {
                 return;
             }
         }
-
-        // Генераторы случайных чисел (вынеси их в один .cpp файл, чтобы избежать ошибки duplicate symbol)
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<int> distrib(0, 3);
-
-
-
-        int opposite = (direction + 2) % 4;
-        std::vector<int> validDirections;
-
-        for (int d = 0; d < 4; ++d) {
-            if (d == opposite) continue;
-
-            int newX = x, newY = y;
-            switch (d) {
-                case 0: newY -= 1; break;
-                case 1: newX += 2; break;
-                case 2: newY += 1; break;
-                case 3: newX -= 2; break;
-            }
-
-            if (CanMove(newX, newY, map) &&
-                newX >= scatterZoneMinX && newX <= scatterZoneMaxX &&
-                newY >= scatterZoneMinY && newY <= scatterZoneMaxY) {
-                validDirections.push_back(d);
-                }
-        }
-
-        if (!validDirections.empty()) {
-            std::uniform_int_distribution<int> choiceDistrib(0, validDirections.size() - 1);
-            int chosen = validDirections[choiceDistrib(gen)];
-
-            direction = chosen;
-            switch (direction) {
-                case 0: y -= 1; break;
-                case 1: x += 2; break;
-                case 2: y += 1; break;
-                case 3: x -= 2; break;
-            }
-        }
     }
 }
 
-void RedGhost::MoveStep(const PM_PacMan& pacman, const std::vector<std::vector<int>> &map) {
+void PM_BlueGhost::MoveStep(const PM_PacMan &pacman, const std::vector<std::vector<int>> &map) {
     switch (currentMode) {
         case SCATTER:
             ScatterMode(map);
-            break;
+        break;
         case CHASE:
-            reachedScatterTarget = false;
             ChaseMode(pacman.GetX(), pacman.GetY(), map);
-            break;
+        break;
         case FRIGHTENED:
             if (FrightenedTimer>0) {
                 FrightenedMode(map);
@@ -166,17 +119,15 @@ void RedGhost::MoveStep(const PM_PacMan& pacman, const std::vector<std::vector<i
         default:
             break;
     }
-
 }
 
-
-void RedGhost::SwitchMode(int playerX, int playerY) {
+void PM_BlueGhost::SwitchMode(int playerX, int playerY) {
     if (currentMode == FRIGHTENED) return;
-    if (std::hypot(playerX - x, playerY - y)>=20 && FrightenedTimer == 0) {
-        currentMode = SCATTER;
-    }
-    else {
+    if (reachedScatterTarget == true && Distance(playerX,playerY,x, y)>4) {
+        reachedScatterTarget = false;
         currentMode = CHASE;
     }
+    else if (reachedScatterTarget == false && Distance(playerX,playerY,x, y)<=4) {
+        currentMode = SCATTER;
+    }
 }
-

@@ -14,4 +14,7 @@ add_executable(PacMan_Game private/main.cpp
         public/RedGhost.h
         private/PM_PinkGhost.cpp
         public/PM_PinkGhost.h
+        private/PM_BlueGhost.cpp
+        public/PM_BlueGhost.h
+        public/PM_PowerPellet.h
 )

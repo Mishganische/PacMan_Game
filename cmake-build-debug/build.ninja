@@ -51,37 +51,43 @@ build cmake_object_order_depends_target_PacMan_Game: phony || .
 
 build CMakeFiles/PacMan_Game.dir/private/main.cpp.o: CXX_COMPILER__PacMan_Game_unscanned_Debug /Users/mikhailarzumanov/Пыль/University/2024$:2025$:2/Programming$ 2/PacMan_Game/private/main.cpp || cmake_object_order_depends_target_PacMan_Game
   DEP_FILE = CMakeFiles/PacMan_Game.dir/private/main.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -mmacosx-version-min=15.3 -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/PacMan_Game.dir
   OBJECT_FILE_DIR = CMakeFiles/PacMan_Game.dir/private
 
 build CMakeFiles/PacMan_Game.dir/private/PM_PacMan.cpp.o: CXX_COMPILER__PacMan_Game_unscanned_Debug /Users/mikhailarzumanov/Пыль/University/2024$:2025$:2/Programming$ 2/PacMan_Game/private/PM_PacMan.cpp || cmake_object_order_depends_target_PacMan_Game
   DEP_FILE = CMakeFiles/PacMan_Game.dir/private/PM_PacMan.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -mmacosx-version-min=15.3 -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/PacMan_Game.dir
   OBJECT_FILE_DIR = CMakeFiles/PacMan_Game.dir/private
 
 build CMakeFiles/PacMan_Game.dir/private/PM_Map.cpp.o: CXX_COMPILER__PacMan_Game_unscanned_Debug /Users/mikhailarzumanov/Пыль/University/2024$:2025$:2/Programming$ 2/PacMan_Game/private/PM_Map.cpp || cmake_object_order_depends_target_PacMan_Game
   DEP_FILE = CMakeFiles/PacMan_Game.dir/private/PM_Map.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -mmacosx-version-min=15.3 -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/PacMan_Game.dir
   OBJECT_FILE_DIR = CMakeFiles/PacMan_Game.dir/private
 
 build CMakeFiles/PacMan_Game.dir/private/Ghost.cpp.o: CXX_COMPILER__PacMan_Game_unscanned_Debug /Users/mikhailarzumanov/Пыль/University/2024$:2025$:2/Programming$ 2/PacMan_Game/private/Ghost.cpp || cmake_object_order_depends_target_PacMan_Game
   DEP_FILE = CMakeFiles/PacMan_Game.dir/private/Ghost.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -mmacosx-version-min=15.3 -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/PacMan_Game.dir
   OBJECT_FILE_DIR = CMakeFiles/PacMan_Game.dir/private
 
 build CMakeFiles/PacMan_Game.dir/private/RedGhost.cpp.o: CXX_COMPILER__PacMan_Game_unscanned_Debug /Users/mikhailarzumanov/Пыль/University/2024$:2025$:2/Programming$ 2/PacMan_Game/private/RedGhost.cpp || cmake_object_order_depends_target_PacMan_Game
   DEP_FILE = CMakeFiles/PacMan_Game.dir/private/RedGhost.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -mmacosx-version-min=15.3 -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/PacMan_Game.dir
   OBJECT_FILE_DIR = CMakeFiles/PacMan_Game.dir/private
 
 build CMakeFiles/PacMan_Game.dir/private/PM_PinkGhost.cpp.o: CXX_COMPILER__PacMan_Game_unscanned_Debug /Users/mikhailarzumanov/Пыль/University/2024$:2025$:2/Programming$ 2/PacMan_Game/private/PM_PinkGhost.cpp || cmake_object_order_depends_target_PacMan_Game
   DEP_FILE = CMakeFiles/PacMan_Game.dir/private/PM_PinkGhost.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk -fcolor-diagnostics
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -mmacosx-version-min=15.3 -fcolor-diagnostics
+  OBJECT_DIR = CMakeFiles/PacMan_Game.dir
+  OBJECT_FILE_DIR = CMakeFiles/PacMan_Game.dir/private
+
+build CMakeFiles/PacMan_Game.dir/private/PM_BlueGhost.cpp.o: CXX_COMPILER__PacMan_Game_unscanned_Debug /Users/mikhailarzumanov/Пыль/University/2024$:2025$:2/Programming$ 2/PacMan_Game/private/PM_BlueGhost.cpp || cmake_object_order_depends_target_PacMan_Game
+  DEP_FILE = CMakeFiles/PacMan_Game.dir/private/PM_BlueGhost.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -mmacosx-version-min=15.3 -fcolor-diagnostics
   OBJECT_DIR = CMakeFiles/PacMan_Game.dir
   OBJECT_FILE_DIR = CMakeFiles/PacMan_Game.dir/private
 
@@ -93,8 +99,8 @@ build CMakeFiles/PacMan_Game.dir/private/PM_PinkGhost.cpp.o: CXX_COMPILER__PacMa
 #############################################
 # Link the executable PacMan_Game
 
-build PacMan_Game: CXX_EXECUTABLE_LINKER__PacMan_Game_Debug CMakeFiles/PacMan_Game.dir/private/main.cpp.o CMakeFiles/PacMan_Game.dir/private/PM_PacMan.cpp.o CMakeFiles/PacMan_Game.dir/private/PM_Map.cpp.o CMakeFiles/PacMan_Game.dir/private/Ghost.cpp.o CMakeFiles/PacMan_Game.dir/private/RedGhost.cpp.o CMakeFiles/PacMan_Game.dir/private/PM_PinkGhost.cpp.o
-  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.2.sdk
+build PacMan_Game: CXX_EXECUTABLE_LINKER__PacMan_Game_Debug CMakeFiles/PacMan_Game.dir/private/main.cpp.o CMakeFiles/PacMan_Game.dir/private/PM_PacMan.cpp.o CMakeFiles/PacMan_Game.dir/private/PM_Map.cpp.o CMakeFiles/PacMan_Game.dir/private/Ghost.cpp.o CMakeFiles/PacMan_Game.dir/private/RedGhost.cpp.o CMakeFiles/PacMan_Game.dir/private/PM_PinkGhost.cpp.o CMakeFiles/PacMan_Game.dir/private/PM_BlueGhost.cpp.o
+  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk -mmacosx-version-min=15.3
   OBJECT_DIR = CMakeFiles/PacMan_Game.dir
   POST_BUILD = :
   PRE_LINK = :
